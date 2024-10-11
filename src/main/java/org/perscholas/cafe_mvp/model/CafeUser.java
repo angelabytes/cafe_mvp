@@ -1,0 +1,22 @@
+package org.perscholas.cafe_mvp.model;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+@Data
+@Inheritance(strategy = InheritanceType.JOINED)
+@Entity
+
+public class CafeUser {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private String email;
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+}

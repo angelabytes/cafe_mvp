@@ -1,0 +1,134 @@
+{
+  "restaurant_name": "Mystic Twilight",
+  "menu_sections": [
+    {
+      "name": "Ethereal Entrees",
+      "items": [
+        {
+          "name": "Shapeshifter's Stew",
+          "description": "A hearty, slowly simmering stew that changes color and flavor with each spoonful. Served with crusty garlic bread.",
+          "price": 14.50,
+          "image_url": "/images/shape_shifter.png"
+        },
+        {
+          "name": "Siren's Song Seafood Pasta",
+          "description": "Black squid ink pasta tossed with an assortment of seafood in a creamy sauce, garnished with edible flowers.",
+          "price": 16.75,
+          "image_url": "static/images/sirens_song.png"
+        },
+        {
+          "name": "Phantom's Chicken Slider",
+          "description": "A ghostly white sandwich made with shaved chicken, white cheddar, and caramelized onions on a pale roll.",
+          "price": 13.25,
+          "image_url": "static/images/phatoms_slider.png"
+        },
+        {
+          "name": "Werewolf's Full Moon Burger",
+          "description": "A juicy burger topped with a full moon-shaped fried egg, blue cheese, and bacon on a jet-black bun.",
+          "price": 15.00,
+          "image_url": "static/images/werewolfs_burger.png"
+        },
+        {
+          "name": "Enchanted Forest Salad",
+          "description": "Mixed greens with roasted root vegetables, candied nuts, and a tangy vinaigrette. Served in a smoke-filled glass cloche.",
+          "price": 12.50,
+          "image_url": "static/images/enchanted_salad.png"
+        }
+      ]
+    },
+    {
+      "name": "Enchanted Elixirs",
+      "items": [
+        {
+          "name": "Moonlit Mist",
+          "description": "A shimmering lavender latte infused with vanilla and star anise, topped with a swirl of silvery foam.",
+          "price": 6.50,
+          "image_url": "static/images/moonlit_mist.png"
+        },
+        {
+          "name": "Witch's Brew",
+          "description": "A steaming, color-changing tea that shifts from deep purple to midnight blue as you drink.",
+          "price": 7.00,
+          "image_url": "static/images/witchs_brew.png"
+        },
+        {
+          "name": "Spectral Sparkle",
+          "description": "Effervescent lemon-lime soda with a splash of butterfly pea flower syrup, served over glowing ice cubes.",
+          "price": 5.75,
+          "image_url": "static/images/spectral_sparkle.png"
+        },
+        {
+          "name": "Vampire's Kiss",
+          "description": "Rich, dark hot chocolate with a hint of cherry, topped with blood-red whipped cream.",
+          "price": 6.25,
+          "image_url": "static/images/vampires_kiss.png"
+        },
+        {
+          "name": "Ghostly Chai",
+          "description": "A misty, spiced chai latte made with almond milk and dusted with cinnamon \"ash.\"",
+          "price": 5.50,
+          "image_url": "static/images/ghostly_chai.png"
+        },
+        {
+          "name": "Séance Espresso",
+          "description": "A potent double shot of espresso served in a smoked glass, accompanied by a fortune cookie.",
+          "price": 4.75,
+          "image_url": "static/images/seance_espresso.png"
+        },
+        {
+          "name": "Diviner's Drip",
+          "description": "Our house blend coffee brewed to perfection, served with a side of flavored \"crystal\" sugar sticks.",
+          "price": 4.25,
+          "image_url": "static/images/diviners_drip.png"
+        },
+        {
+          "name": "Oracle Oolong",
+          "description": "A delicate oolong tea served in a clear glass teapot with a \"floating\" fortune ball that reveals your tea leaves.",
+          "price": 5.25,
+          "image_url": "static/images/oracle_oolong.png"
+        },
+        {
+          "name": "Midsummer Night's Green Tea",
+          "description": "A refreshing green tea infused with mint and elderflower, served over a glowing ice sphere.",
+          "price": 4.50,
+          "image_url": "static/images/midsummer_night.png"
+        }
+      ]
+    },
+    {
+      "name": "Mystical Morsels",
+      "items": [
+        {
+          "name": "Graveyard Dirt Cake",
+          "description": "Layers of rich chocolate cake and creamy pudding, topped with crushed cookies and gummy worms.",
+          "price": 8.50,
+          "image_url": "static/images/graveyard_dirt.png"
+        },
+        {
+          "name": "Crystal Ball Sorbet",
+          "description": "A sphere of clear, lemon-basil sorbet that reveals your \"fortune\" (a fruit compote center) as it melts.",
+          "price": 7.25,
+          "image_url": "static/images/crystalball_sorbet.png"
+        },
+        {
+          "name": "Banshee's Scream Sundae",
+          "description": "Vanilla bean and blackberry ice creams with a tart berry coulis, topped with meringue \"ghosts.\"",
+          "price": 9.00,
+          "image_url": "static/images/banshees_scream.png"
+        },
+        {
+          "name": "Faerie Ring Donuts",
+          "description": "A trio of mini donuts glazed with shimmering, edible luster dust in magical flavors: rose gold, mint green, and lavender.",
+          "price": 6.75,
+          "image_url": "static/images/faerie_ring.png"
+        },
+        {
+          "name": "Midnight Shadow Tart",
+          "description": "A dark chocolate ganache tart with a constellation of edible silver stars, served on a smoky mirror glaze.",
+          "price": 8.00,
+          "image_url": "static/images/midnight_shadow.png"
+        }
+      ]
+    }
+  ]
+}
