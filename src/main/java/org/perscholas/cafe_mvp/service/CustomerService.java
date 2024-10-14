@@ -29,4 +29,13 @@ public class CustomerService {
     public List<Customer> findAllCustomers() {
         return customerRepository.findAll();
     }
+
+    public Customer updateCustomer(Long id, Customer customerinfo) {
+        return customerRepository.findById(id)
+                .map(customer -> {
+                    customer.setName(customerinfo.getName());
+                    customer.setEmail(customerinfo.getEmail());
+                    return customerRepository.save(customer);
+                }).orElse(null);
+    }
 }

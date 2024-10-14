@@ -31,3 +31,28 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+# Ignore application secrets and environment files
+application-secrets.properties
+.env
+
+# Ignore class files and other build artifacts
+/target/
+*.class
+
+# Ignore IDE configuration files
+.idea/
+.vscode/
+
+# Ignore Maven specific files
+/logs/
+maven-archiver/
+maven-status/
+
+# Ignore operating system files
+.DS_Store
+Thumbs.db
+
+# Spring Boot specific files
+/out/

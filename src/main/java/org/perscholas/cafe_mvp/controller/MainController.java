@@ -1,7 +1,7 @@
 package org.perscholas.cafe_mvp.controller;
 
 import org.perscholas.cafe_mvp.model.CafeMenu;
-import org.perscholas.cafe_mvp.service.MenuService;
+import org.perscholas.cafe_mvp.service.CafeMenuService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class MainController {
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
     @Autowired
-    private MenuService menuService;
+    private CafeMenuService cafeMenuService;
 
     @GetMapping("/")
     public String getHome(Model model) {
@@ -24,18 +24,11 @@ public class MainController {
         return "home";
     }
 
-//
 //    @GetMapping("/menu")
 //    public String getMenu(Model model) {
-//        model.addAttribute("cafemenu", menuService.getCafeMenu());
+//        CafeMenu cafeMenu = cafeMenuService.getCafeMenu();
+//        logger.info("Adding cafeMenu to model: {}", cafeMenu);
+//        model.addAttribute("cafemenu", cafeMenu);
 //        return "menu";
 //    }
-
-    @GetMapping("/menu")
-    public String getMenu(Model model) {
-        CafeMenu cafeMenu = menuService.getCafeMenu();
-        logger.info("Adding cafeMenu to model: {}", cafeMenu);
-        model.addAttribute("cafemenu", cafeMenu);
-        return "menu";
-    }
 }

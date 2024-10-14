@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -16,6 +17,19 @@ public class MenuSection {
 
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name ="cafe_menu_id")
+    private CafeMenu cafeMenu;
+
     @OneToMany(cascade = CascadeType.ALL)
-    private List<MenuItem> items;
+    private List<MenuItem> items = new ArrayList<>();
+
+
+    public CafeMenu getCafeMenu() {
+        return cafeMenu;
+    }
+    public void setCafeMenu(CafeMenu cafeMenu){
+        this.id = cafeMenu.getId();
+    }
+
 }

@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Great+Vibes&display=swap');
+
+:root {
+    --header-font: "Great Vibes", cursive;
+}
+
+h1 {
+    font-family: var(--header-font);
+}
+
+body {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    font-family: "Dosis", sans-serif;
+    height: 100vh;
+    width: 100vw;
+}
+
+.card-container{
+    display: flex;
+    flex-direction: row;
+    margin: 1rem;
+    justify-content: center;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: 50%;
+    height: auto;
+    box-shadow: 0.5rem 0.5rem 0.1rem rgba(0, 0, 0, 0.3);
+    border-radius: 0.5rem;
+    margin-bottom: 4rem;
+}
+
+.card img {
+    display: flex;
+    width: 40%;
+    height: 40%;
+    align-content: center;
+    align-self: center;
+    box-shadow: 0.5rem 0.5rem 0.2rem rgba(0, 0, 0, 0.3);
+    margin-bottom: 2rem;
+}
+
+.card p {
+    display: flex;
+    align-content: center;
+    text-align: center;
+    font-size: 1.2em;
+}
