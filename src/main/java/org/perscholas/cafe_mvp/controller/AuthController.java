@@ -1,9 +1,11 @@
 package org.perscholas.cafe_mvp.controller;
 
+import jakarta.validation.Valid;
 import org.perscholas.cafe_mvp.model.Customer;
 import org.perscholas.cafe_mvp.service.CustomerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -16,6 +18,17 @@ public class AuthController {
 
     public AuthController(CustomerService customerService) {
         this.customerService = customerService;
+    }
+
+    @GetMapping("/register")
+    public String register(Model model) {
+        model.addAttribute("customer", new Customer());
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String register(@Valid @ModelAttribute Customer customer, BindingResult bindingResult) {
+
     }
 
     @GetMapping("/login")

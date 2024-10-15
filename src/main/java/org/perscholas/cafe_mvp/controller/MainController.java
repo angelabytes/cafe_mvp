@@ -29,7 +29,10 @@ public class MainController {
     }
 
 //    @GetMapping("/menu")
-//     public String menu () {
+//    public String getMenu(Model model) {
+//        CafeMenu cafeMenu = cafeMenuService.getCafeMenu();
+//        logger.info("Adding cafeMenu to model: {}", cafeMenu);
+//        model.addAttribute("cafemenu", cafeMenu);
 //        return "menu";
 //    }
 

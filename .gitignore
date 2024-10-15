@@ -34,7 +34,7 @@ build/
 
 
 # Ignore application secrets and environment files
-application-secret.properties
+src/main/resources/application-secret.properties
 .env
 .env.*
 
