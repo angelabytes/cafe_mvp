@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="https://cdn.cdnhub.io/font-awesome/6.6.0/css/all.css" type="text/css">
+</head>
+<body>
+    <h1>Items added to your cart: </h1>
+    <div th:if="${cart.items.size() == 0}">
+        <p>You have not added any food to your cart.</p>
+    </div>
+
+    <table th:if="${cart.items.size() > 0}">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="cartItem : ${cart.items}">
+                <td th:text="${cartItem.menuItem.name}">Item Name</td>
+                <td>
+                    <div class="quantity-buttons">
+                        <form th:action="@{/cart/update/{itemId}/(itemId=${cartItem.menuItem.id})}" method="post">
+                            <button type="button" onclick="decreaseQuantity('${cartItem.menuItem.id}')"><i class="fa-light fa-minus"></i></button>
+                            <span th:text="${cartItem.quantity}">1</span>
+                            <button type="button" onclick="increaseQuantity('${cartItem.menuItem.id}')"><i class="fa-light fa-plus"></i></button>
+                            <input type="hidden" name="quantity" th:value="${cartItem.quantity}" class="quantity-input" />
+                            <button type="submit" style="display:none">Update</button>
+                        </form>
+                    </div>
+                </td>
+                <td th:text="${cartItem.getPrice()}">Total Price</td>
+                <td>
+                    <form th:action="@{/cart/remove/{itemId}(itemId=${cartItem.menuItem.id})}" method="post">
+                        <button type="submit">Remove</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>Total: <span th:text="${total}">0</span></h2>
+</body>
+</html>

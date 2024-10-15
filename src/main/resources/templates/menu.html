@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mystic Twilight Menu</title>
+    <link rel="stylesheet" th:href="@{/css/menu.css}">
+</head>
+<body>
+<div class=main-container th:if="${cafemenu.restaurantName}">
+    <h1 class="restaurant-name" th:text="${cafemenu.restaurantName} + ' Delights'"></h1>
+    <div class="section-container" th:each="section : ${cafemenu.menuSections}">
+        <h2 class="section-name" th:text="${section.name}"></h2>
+        <div class="card-container">
+            <div class="card" th:each="item : ${section.items}">
+                <img th:src="@{${item.imageUrl}}" alt="Menu Item">
+                <strong th:text="${item.name}"></strong>
+                <span th:text="${#numbers.formatDecimal(item.price, 1, 2)}"></span>
+                <p th:text="${item.description}"></p>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
