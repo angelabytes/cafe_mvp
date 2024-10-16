@@ -1,5 +1,6 @@
 package org.perscholas.cafe_mvp.controller;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.perscholas.cafe_mvp.model.Customer;
 import org.perscholas.cafe_mvp.service.CustomerService;
@@ -28,7 +29,12 @@ public class AuthController {
 
     @PostMapping("/register")
     public String register(@Valid @ModelAttribute Customer customer, BindingResult bindingResult) {
-
+        if (bindingResult.hasErrors()) {
+            return "register";
+        }
+        customer.setPassword(customer.getPassword().trim());
+        customerService.createCustomer(customer);
+        return "redirect:/login";
     }
 
     @GetMapping("/login")
@@ -39,12 +45,14 @@ public class AuthController {
     @PostMapping("/login")
     public String login(@RequestParam String email,
                         @RequestParam String password,
-                        Model model) {
+                        Model model,
+                        HttpSession session) {
         Optional<Customer> loggedCustomer = customerService.findCustomerByEmail(email);
         if (loggedCustomer.isPresent() && loggedCustomer.get().getPassword().equals(password)) {
             //Store customer in session
             Customer customer = loggedCustomer.get();
-            return "redirect:/cart";
+            session.setAttribute("customer", customer);
+            return "redirect:/";
         }
         else {
             //Redirects to login-form and displays error
@@ -56,6 +64,6 @@ public class AuthController {
     @GetMapping("logout")
     public String logout(Model model) {
         model.asMap().remove("currentCustomer");
-        return "redirect:/cart";
+        return "redirect:/home";
     }
 }

@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&display=swap');
+
+:root {
+    --header-font: "Great Vibes", cursive;
+}
+
+
+body, h1, p{
+    margin: 0;
+    padding: 0;
+    font-family: "Dosis", sans-serif;
+}
+
+h1 {
+    font-family: "Lobster", sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.top-nav{
+    background-color: rgba(12, 9, 9, 0.1);
+    backdrop-filter: blur(40px);
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    padding: 0.2rem;
+}
+
+.top-nav ul {
+    padding: 0.6rem;
+    margin: 0;
+    display: flex;
+}
+.top-nav li {
+    margin: 0 1rem;
+    list-style-type: none;
+}
+.top-nav a{
+    text-decoration: none;
+}
+
+.main-area {
+    display: flex;
+    flex-grow: 1;
+}
+
+.side-nav {
+    background-color: #2B3748;
+    color: #f7db95;
+    width: 12.5rem;
+    padding: 0.6rem;
+}
+
+.side-nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    justify-content: space-between;
+}
+
+.side-nav a {
+    text-decoration: none;
+    color: #f7db95;
+}
+
+.side-nav li {
+    margin: 1rem 0;
+    text-align: justify;
+    padding: 1rem;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    position: relative;
+}
+
+/*home page */
+.cafe-image {
+    margin-left: 2rem;
+    width:70%;
+    height:auto;
+    border-radius: 0.5rem;
+    box-shadow: 0.5rem 1rem 0.5rem gray;
+}
+
+#statement{
+    display: flex;
+    position: absolute;
+    align-self: flex-start;
+    flex-direction: column;
+    color: #B4D2E3;
+    margin-right: 8rem;
+    text-align: justify;
+}
+
+#mystic{
+    color: #9C7F6D;
+    font-variant: small-caps;
+    font-size: 7em;
+    margin-left: 4rem;
+    text-shadow: 0.1em 0.1em 0.2em #2B3748;
+}
+
+#twilight, #slogan-2{
+    background: -webkit-linear-gradient(152deg, #9C7F6D 0%, #f7db95 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0.1em 0.1em 0.2em #2B3748;
+}
+
+#slogan-1{
+    text-align: center;
+    margin-left: 6rem;
+    text-shadow: 0.1em 0.1em 0.2em #2B3748;
+}
+
+#slogan-3{
+    text-align: right;
+    margin-left: 8rem;
+    color: white;
+    text-shadow: 0.1em 0.1em 0.2em #2B3748;
+}
+
+.fa-cart-shopping {
+    color: #2B3748;
+}

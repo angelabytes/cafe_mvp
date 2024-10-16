@@ -3,10 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Mystic Twilight</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+                          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+                          crossorigin="anonymous"
+                          referrerpolicy="no-referrer" />
 </head>
 <body>
-    <h1>Welcome to Mystic Twilight</h1>
-    <p>Our cafe has extraordinary food to delight the palate</p>
-    <a href="/menu">See what we have to offer!</a>
+    <div class="container">
+        <nav th:replace="fragments :: top-nav"></nav>
+        <div class="main-area">
+            <nav th:replace="fragments :: side-nav"></nav>
+            <div class="main-content">
+                <img id="cafe-interior" class="cafe-image" src="/images/cafe.png" alt="restaurant-image">
+                <div id="statement">
+                    <h1>Welcome to </h1>
+                    <h1 id="mystic">Mystic <span id="twilight">Twilight</span></h1>
+                    <h2 id="slogan-1">Our cafe has extraordinary food to <span id="slogan-2">delight the palate</span></h2>
+                    <h3 id="slogan-3">Check out our Starlight Delights</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

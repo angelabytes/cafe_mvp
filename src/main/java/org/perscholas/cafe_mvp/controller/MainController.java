@@ -1,6 +1,8 @@
 package org.perscholas.cafe_mvp.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.perscholas.cafe_mvp.model.CafeMenu;
+import org.perscholas.cafe_mvp.model.Customer;
 import org.perscholas.cafe_mvp.service.CafeMenuService;
 import org.perscholas.cafe_mvp.service.CustomerService;
 import org.slf4j.Logger;
@@ -22,11 +24,20 @@ public class MainController {
     @Autowired
     private CustomerService customerService;
 
+//    @GetMapping("/")
+//    public String getHome(Model model) {
+//        model.addAttribute("cafemenu", new CafeMenu());
+//        return "home";
+//    }
+
     @GetMapping("/")
-    public String getHome(Model model) {
+    public String getHome(Model model, HttpSession session) {
+        Customer currentCustomer = (Customer) session.getAttribute("currentCustomer");
         model.addAttribute("cafemenu", new CafeMenu());
+        model.addAttribute("currentCustomer", currentCustomer);
         return "home";
     }
+
 
 //    @GetMapping("/menu")
 //    public String getMenu(Model model) {
