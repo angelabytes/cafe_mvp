@@ -31,4 +31,8 @@ public class MenuItemService {
         menuItemRepository.save(menuItem);
         logger.info("Added menu item: {}", menuItem);
     }
+
+    public Optional<MenuItem> findMenuItemById(Long menuItemId){
+        return menuItemRepository.findById(menuItemId);
+    }
 }

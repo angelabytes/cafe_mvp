@@ -2,6 +2,7 @@ package org.perscholas.cafe_mvp.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 
 
 import java.math.BigDecimal;
@@ -26,10 +27,12 @@ public class Cart {
 
     public void addItem(CartItem item) {
         this.items.add(item);
+        item.setCart(this);
     }
 
     public void removeItem(CartItem item) {
         this.items.remove(item);
+        item.setCart(null);
     }
 
     public BigDecimal calculateGrandTotal() {

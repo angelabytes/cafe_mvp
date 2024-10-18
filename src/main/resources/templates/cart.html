@@ -3,6 +3,7 @@
 <head th:replace="~{fragments :: head}"></head>
 <body>
     <h1>Items added to your bag: </h1>
+
     <div th:if="${cart.items.size() == 0}">
         <p>You have not added anything to your bag.</p>
     </div>
@@ -12,34 +13,45 @@
             <tr>
                 <th>Item</th>
                 <th>Quantity</th>
+                <th>Total Quantity</th>
                 <th>Price</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="cartItem : ${cart.items}">
-                <td th:text="${cartItem.menuItem.name}">Item Name</td>
+                <td class="cart-item-name" th:text="${cartItem.menuItem.name}"></td>
                 <td>
                     <div class="quantity-buttons">
                         <form th:action="@{/cart/update/{itemId}/(itemId=${cartItem.menuItem.id})}" method="post">
                             <span><button class="decrease-btn"><i class="fa-solid fa-minus fa-sm"></i></button></span>
-                            <input class="count" type="number" name="quantity" value="1" min="1" style="width: 1.5rem;">
+                            <input class="count" type="number" name="quantity" th:value="1" min="1" style="width: 1.5rem;">
                             <span><button class="increase-btn"><i class="fa-solid fa-plus fa-sm"></i></button></span>
-                            <input type="hidden" name="quantity" th:value="${cartItem.quantity}" class="quantity-input" />
+                            <span th:type="text" name="quantity" th:value="${cartItem.quantity}" class="quantity-input"></span>
                             <button type="submit" style="display:none">Update</button>
                         </form>
                     </div>
                 </td>
-                <td th:text="${cartItem.getPrice()}">Total Price</td>
+<!--                <td class="total-quantity" th:text="${cartItem.quantity}">0</td>-->
+                <td class="total-quantity"><i class="fa-solid fa-xmark fa-xs"></i>&nbsp;<span th:text="${cartItem.quantity}"></span></td>
                 <td>
-                    <form th:action="@{/cart/remove/{itemId}(itemId=${cartItem.menuItem.id})}" method="post">
-                        <button type="submit">Remove</button>
+                    <span class="item-price" th:text="${cartItem.getPrice()}">0</span>
+                </td>
+                <td>
+                    <form th:action="@{/cart/remove}" method="post">
+                        <input type="hidden" name="menuItemId" th:value="${cartItem.menuItem.id}">
+                        <input type="hidden" name="cartId" th:value="${cart.id}">
+                        <button type="submit" class="remove-btn"><i class="fa-regular fa-rectangle-xmark"></i></button>
                     </form>
                 </td>
             </tr>
         </tbody>
     </table>
+
     <h2>Total: <span th:text="${cart.calculateGrandTotal()}">0</span></h2>
+    <div>
+        <a th:href="@{/menu}" class="btn">Go back to Menu</a>
+    </div>
+    <script src="/javascript/app.js"></script>
 </body>
 </html>
 

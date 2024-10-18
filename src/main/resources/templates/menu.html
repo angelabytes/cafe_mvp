@@ -9,6 +9,7 @@
                     <nav th:replace="~{fragments :: side-nav}"></nav>
                     <div class="main-content">
                         <h1 class="restaurant-name" th:text="${cafeMenu.restaurantName} + ' Delights'"></h1>
+
                         <div class="section-container" th:each="section : ${cafeMenu.menuSections}">
                             <h2 class="section-name" th:text="${section.name}"></h2>
                             <div class="card-container">
