@@ -9,7 +9,6 @@
                     <nav th:replace="~{fragments :: side-nav}"></nav>
                     <div class="main-content">
                         <h1 class="restaurant-name" th:text="${cafeMenu.restaurantName} + ' Delights'"></h1>
-
                         <div class="section-container" th:each="section : ${cafeMenu.menuSections}">
                             <h2 class="section-name" th:text="${section.name}"></h2>
                             <div class="card-container">
@@ -21,9 +20,9 @@
                                     <form id="add-form" th:action="@{/cart/add}" method="post" >
                                         <input type="hidden" name="menuItemId" th:value="${item.id}">
                                         <input type="hidden" name="cartId" th:value="${cartId}">
-                                        <span><button class="decrease-btn"><i class="fa-solid fa-minus fa-sm"></i></button></span>
+                                        <span><button class="decrease-btn"><i class="fa-solid fa-minus fa-2xs"></i></button></span>
                                         <input class="count" type="number" name="quantity" value="1" min="1" style="width: 1.5rem;">
-                                        <span><button class="increase-btn"><i class="fa-solid fa-plus fa-sm"></i></button></span>
+                                        <span><button class="increase-btn"><i class="fa-solid fa-plus fa-2xs"></i></button></span>
                                         <button type="submit" id="add-to-cart">Add</button>
                                     </form>
                                     <p th:text="${item.description}"></p>

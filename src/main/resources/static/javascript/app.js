@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", () =>  {
         if (currentValue + valueToChange >= 1) {
             input.value = currentValue + valueToChange;
         }
+        // const form = input.closest("form");
+        // form.querySelector("button[type='submit']").click();
     }
 
     increaseButtons.forEach(button => {

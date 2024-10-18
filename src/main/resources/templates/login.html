@@ -2,18 +2,26 @@
 <html lang="en">
 <head th:replace="~{fragments :: head}"></head>
 <body>
-  <h1>Login</h2>
-  <form action="/login" method="post">
-    <label for="email" >Email</label>
-    <input type="email" name="email" id="email" th:placeholder="email" />
-    <br>
-    <label for="password" >Password</label>
-    <input type="password" name="password" id="password" th:placeholder="password" />
-    <button type="submit">Login</button>
-    <p>Don't have an account? <a href="/register"> Register here: &nbsp; <i class="fa-regular fa-pen-to-square"></i></a></p>
-  </form>
-<div th:if="${error}">
-  <p th:text="${error}"></p>
-</div>
+  <div class="blend">
+    <div class="form-container">
+      <img src="/images/Mystical%20Esoteric%20Tableau.jpeg" alt="tarot_card_table">
+      <form action="/login" method="post">
+        <h2>Login</h2>
+        <div>
+          <label for="email" >Email</label>
+          <input type="email" name="email" id="email" th:placeholder="email" />
+          <br>
+          <label for="password" >Password</label>
+          <input type="password" name="password" id="password" th:placeholder="password" />
+          <button type="submit">Login</button>
+          <p>Don't have an account? <a href="/register"> Register here: &nbsp; <i class="fa-regular fa-pen-to-square"></i></a></p>
+          <div th:if="${error}">
+            <p th:text="${error}"></p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
 </body>
 </html>

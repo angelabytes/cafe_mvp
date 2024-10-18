@@ -196,7 +196,7 @@ h1, h2, h3, h4 {
 }
 .section-name {
     display: flex;
-    margin: 4rem 3rem 3rem 5.8rem;
+    margin: 4rem 3rem 3rem 4rem;
     color: #f7db95;
 }
 
@@ -303,11 +303,12 @@ input[type=number] {
     border-radius: 50%;
     padding: 0.2rem 0.4rem 0.2rem 0.4rem;
     background-color: #2B3748;
+    box-shadow: 0.14rem 0.1rem rgba(0, 0, 0, 0.3);
     border: none;
 }
 .fa-plus,.fa-minus {
     color: #f7db95;
-    margin-top: 0.6rem;
+    margin-top: 0.4rem;
 }
 
 /*cart*/
@@ -320,4 +321,39 @@ input[type=number] {
 }
 .cart-item-name {
     color: #9C7F6D;
+}
+
+/*login*/
+.blend {
+    background-size: cover;
+    background: url("static/images/galaxy1.png") no-repeat center;
+    background-blend-mode: hard-light;
+}
+.form-container{
+    display: flex;
+    min-width: 100vw;
+    min-height: 100vh;
+
+}
+.form-container img{
+    width: 50%;
+    height: auto;
+}
+.form-container form {
+    width: 50%;
+}
+
+.form-container div {
+    justify-content: center;
+    width: 100%;
+    height: 50%;
+}
+.form-container fieldset {
+    border: none;
+    text-align: left;
+    max-width: fit-content;
+    margin: auto;
+}
+.form-container label{
+    justify-self: left;
 }

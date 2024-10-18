@@ -55,12 +55,6 @@ public class CartController {
     }
 
     @PostMapping("/add")
-//    public String addItemToCart(@RequestParam(required = false) Long cartId,
-//                                @RequestParam Long menuItemId,
-//                                @RequestParam int quantity,
-//                                @RequestParam(required = false) String email,
-//                                Model model) {
-
     public String addItemToCart(@RequestParam Long menuItemId,
                                 @RequestParam int quantity,
                                 HttpSession session,
@@ -72,7 +66,6 @@ public class CartController {
             model.addAttribute("error", "Menu item is not found");
             return "redirect:/menu";
         }
-
 
         //Get cartId from current session
         Long cartId = (Long) session.getAttribute("cartId");
@@ -101,7 +94,6 @@ public class CartController {
         Optional<Cart> cart = cartService.getCart(cartId);
         if(cart.isPresent()) {
             model.addAttribute("cart", cart.get());
-//            model.addAttribute("email", email);
             model.addAttribute("cartId", cartId);
             return "cart";
         }
@@ -117,6 +109,21 @@ public class CartController {
             cartService.removeItemFromCart(cartId, menuItemId);
         }
         catch (RuntimeException e) {
+            model.addAttribute("error", e.getMessage());
+        }
+        return "redirect:/cart";
+    }
+
+
+    @PostMapping("/update")
+    public String updateIteCart(@RequestParam Long menuItemId,
+                                @RequestParam int quantity,
+                                @RequestParam Long cartId,
+                                Model model) {
+        try{
+            cartService.updateItemsInCart(cartId, menuItemId, quantity);
+        }
+        catch(RuntimeException e) {
             model.addAttribute("error", e.getMessage());
         }
         return "redirect:/cart";

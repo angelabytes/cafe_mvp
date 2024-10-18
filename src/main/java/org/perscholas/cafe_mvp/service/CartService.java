@@ -35,8 +35,6 @@ public class CartService {
     }
 
 
-
-
     public void addItemToCart(Long cartId, Long menuItemId, int quantity) {
         //get menu item
         MenuItem menuItem = menuItemRepository.findById(menuItemId)
@@ -61,7 +59,6 @@ public class CartService {
             newItem.setMenuItem(menuItem);
             newItem.setQuantity(quantity);
             newItem.setCart(cart);
-//            cart.addItem(newItem);
             cart.getItems().add(newItem);
 
         }
@@ -80,36 +77,18 @@ public class CartService {
         cartRepository.save(cart);
     }
 
-//    public void removeItemFromCart(Customer customer, Long itemId) {
-//        Cart cart = customer.getCart();
-//        if(cart != null) {
-//            boolean removed = cart.getItems().removeIf(cartItem -> cartItem.getMenuItem().getId().equals(itemId));
-//            cartRepository.save(cart);
-//            if(!removed){
-//                logger.info("Item not found for removal: itemId={}", itemId);
-//            }
-//        }
-//
-//    }
+    @Transactional
+    public Cart updateItemsInCart(Long cartId, Long menuItemId, int updatedQuantity){
+        Cart cart = cartRepository.findById(cartId)
+                .orElseThrow(() -> new RuntimeException("Cart not found"));
+        cart.getItems().stream()
+                .filter(cartItem -> cartItem.getMenuItem().getId().equals(menuItemId))
+                .findFirst()
+                .ifPresent(cartItem -> cartItem.setQuantity(updatedQuantity));
+        updatePrices(cart);
+        return cartRepository.save(cart);
 
-//    @Transactional
-//    public void updateItemQuantity(Customer customer, Long itemId, int quantity) {
-//        Cart cart = customer.getCart();
-//        if(cart != null) {
-//            for(CartItem cartItem : cart.getItems()) {
-//                if(cartItem.getMenuItem().getId().equals(itemId)) {
-//                    if(quantity <= 0) {
-//                        removeItemFromCart(customer, itemId);
-//                    }
-//                    else{
-//                        cartItem.setQuantity(quantity);
-//                    }
-//                    cartRepository.save(cart);
-//                    return;
-//                }
-//            }
-//        }
-//    }
+    }
 
     public List<MenuItem> getAllMenuItems(){
         return menuItemRepository.findAll();
@@ -118,5 +97,9 @@ public class CartService {
     public BigDecimal getTotalForCart(Customer customer) {
         Cart cart = customer.getCart();
         return (cart !=null ) ? cart.calculateGrandTotal() : BigDecimal.ZERO;
+    }
+
+    public void updatePrices(Cart cart){
+        cart.calculateGrandTotal();
     }
 }

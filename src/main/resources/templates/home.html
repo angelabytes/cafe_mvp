@@ -11,9 +11,9 @@
 </head>
 <body>
     <div class="container">
-        <nav th:replace="fragments :: top-nav"></nav>
+        <nav th:replace="~{fragments :: top-nav}"></nav>
         <div class="main-area">
-            <nav th:replace="fragments :: side-nav"></nav>
+            <nav th:replace="~{fragments :: side-nav}"></nav>
             <div class="main-content">
                 <img id="cafe-interior" class="cafe-image" src="/images/cafe.png" alt="restaurant-image">
                 <div id="statement">
