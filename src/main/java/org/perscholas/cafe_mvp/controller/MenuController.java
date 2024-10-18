@@ -36,7 +36,6 @@ public class MenuController {
 
 
     @GetMapping
-//    public String getMenu(String email, Model model){
     public String getMenu(@RequestParam(value= "email", required = false) String email,
                           @RequestParam(value="cartId", required = false) Long cartId,
                           Model model) {

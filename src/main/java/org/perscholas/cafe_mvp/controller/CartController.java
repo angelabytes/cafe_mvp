@@ -23,16 +23,7 @@ public class CartController {
 
     @GetMapping
     public String viewCart(@RequestParam Long cartId, Model model) {
-//        logger.info("Viewing Cart with id {}", cartId);
-//        Optional<Cart> cart = cartService.getCart(cartId);
-//        if (cart.isPresent()) {
-//            model.addAttribute("cart", cart.get());
-//            return "cart";
-//        }
-//        else {
-//            model.addAttribute("error", "Cart not found");
-//            return "redirect:/";
-//        }
+
         logger.info("Viewing Cart with id {}", cartId);
         if(cartId == null){
             model.addAttribute("error", "Cart ID is required to view the cart");
@@ -58,11 +49,6 @@ public class CartController {
                                 @RequestParam(required = false) String email,
                                 Model model) {
 
-//        if(cartId == null) {
-//            model.addAttribute("error", "Cart id is null");
-//            return "redirect:/";
-//        }
-        //if cart wasn't created because the user isn't logged in, create one
         if(cartId == null){
             Cart newCart = new Cart();
             cartService.saveCart(newCart);
