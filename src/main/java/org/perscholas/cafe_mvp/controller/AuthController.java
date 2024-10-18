@@ -2,8 +2,13 @@ package org.perscholas.cafe_mvp.controller;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.perscholas.cafe_mvp.model.Cart;
 import org.perscholas.cafe_mvp.model.Customer;
+import org.perscholas.cafe_mvp.service.CartService;
 import org.perscholas.cafe_mvp.service.CustomerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,14 +17,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Controller
-@SessionAttributes("currentCustomer")
 public class AuthController {
 
-    private final CustomerService customerService;
+    @Autowired
+    private CustomerService customerService;
 
-    public AuthController(CustomerService customerService) {
-        this.customerService = customerService;
-    }
+    @Autowired
+    private CartService cartService;
+
+    private final Logger logger = LoggerFactory.getLogger(AuthController.class);
+
 
     @GetMapping("/register")
     public String register(Model model) {
@@ -38,32 +45,45 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public String showLoginForm(Model model) {
+    public String showLogin() {
         return "login";
     }
+
 
     @PostMapping("/login")
     public String login(@RequestParam String email,
                         @RequestParam String password,
-                        Model model,
-                        HttpSession session) {
-        Optional<Customer> loggedCustomer = customerService.findCustomerByEmail(email);
-        if (loggedCustomer.isPresent() && loggedCustomer.get().getPassword().equals(password)) {
+                        Model model) {
+        Optional<Customer> customer = customerService.findCustomerByEmail(email);
+        if (customer.isPresent() && customer.get().getPassword().equals(password)) {
             //Store customer in session
-            Customer customer = loggedCustomer.get();
-            session.setAttribute("customer", customer);
-            return "redirect:/";
+            model.addAttribute("customer", customer.get());
+            logger.info("Customer logged in with ID {}", customer.get().getId());
+            //Check if customer has a cart
+            Cart cart = customer.get().getCart();
+            if(cart == null) {
+                cart = new Cart();
+                cart.setCustomer(customer.get());
+                cartService.saveCart(cart);
+            }
+            if(cart.getId() == null){
+                throw new IllegalArgumentException("Cart ID can't be null after saving");
+            }
+            model.addAttribute("cartId", cart.getId());
+            logger.info("Cart with ID {} created", cart.getId());
+            return "redirect:/menu";
         }
         else {
-            //Redirects to login-form and displays error
+            //Redirects to log in-form and displays error
             model.addAttribute("error", "Invalid email or password");
+            model.addAttribute("customer", null);
             return "login";
         }
     }
 
-    @GetMapping("logout")
+    @GetMapping("/logout")
     public String logout(Model model) {
-        model.asMap().remove("currentCustomer");
-        return "redirect:/home";
+        model.addAttribute("customer", null);
+        return "redirect:/";
     }
 }

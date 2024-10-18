@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Base64;
 
 
@@ -19,7 +20,8 @@ public class MenuItem {
     @Column(unique = true, nullable = false)
     private String name;
     private String description;
-    private double price;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal price;
 
     @JsonProperty("image_url")
     private String imageUrl;

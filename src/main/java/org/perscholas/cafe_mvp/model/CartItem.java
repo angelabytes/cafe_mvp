@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -26,8 +28,8 @@ public class CartItem {
     private Cart cart;
 
 
-    public double getPrice() {
-        return quantity * menuItem.getPrice();
+    public BigDecimal getPrice() {
+        return new BigDecimal(quantity).multiply(menuItem.getPrice());
     }
 
 }

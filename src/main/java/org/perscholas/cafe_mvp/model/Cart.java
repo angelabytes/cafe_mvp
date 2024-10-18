@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class Cart {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name="customer_id", nullable=false)
+    @JoinColumn(name="customer_id")
     private Customer customer;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -31,10 +32,10 @@ public class Cart {
         this.items.remove(item);
     }
 
-    public double calculateGrandTotal() {
+    public BigDecimal calculateGrandTotal() {
         return items.stream()
-                .mapToDouble(CartItem::getPrice)
-                .sum();
+                .map(CartItem::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
 

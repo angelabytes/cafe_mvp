@@ -22,6 +22,10 @@ public class CustomerService {
         return customerRepository.findByEmail(email);
     }
 
+    public Customer findCustomerById(Long id) {
+        return customerRepository.findById(id).orElse(null);
+    }
+
     public void deleteCustomer(Long id) {
         customerRepository.deleteById(id);
     }

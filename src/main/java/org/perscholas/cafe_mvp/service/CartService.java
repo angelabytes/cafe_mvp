@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.*;
-import java.util.ArrayList;
+import java.math.BigDecimal;
+import java.util.Optional;
 
 @Service
 public class CartService {
@@ -25,30 +25,40 @@ public class CartService {
 
     Logger logger = LoggerFactory.getLogger(CartService.class);
 
-    public void addItemToCart(Customer customer, Long itemId, int quantity) {
-
-        //Check for invalid item or quantity
-        MenuItem item = menuItemRepository.findById(itemId).orElse(null);
-        if(item == null || quantity <= 0) {
-            logger.warn("Invalid item or quantity: itemId={}, quantity={}", itemId, quantity);
-            return;
-        }
-
-        //Get cart for the customer
-        Cart cart = customer.getCart();
-        if(cart == null) {
-            cart = new Cart();
-            cart.setCustomer(customer);
-            customer.setCart(cart);
-            cartRepository.save(cart);
-        }
-
-        //Create a cart item and add it to the customer's cart
-        CartItem cartItem = new CartItem(null, item, quantity, cart);
-        cart.addItem(cartItem);
+    public void saveCart(Cart cart) {
         cartRepository.save(cart);
     }
 
+    public Optional<Cart> getCart(Long id) {
+        return cartRepository.findById(id);
+    }
+
+
+
+
+    public void addItemToCart(Long cartId, Long menuItemId, int quantity) {
+        MenuItem menuItem = menuItemRepository.findById(menuItemId).orElseThrow(() -> new RuntimeException("Menu item not found"));
+        Cart cart = cartRepository.findById(cartId).orElseThrow(() -> new RuntimeException("Menu item not found"));
+
+        //goes through the list of cart items
+        Optional<CartItem> existingCartItem = cart.getItems().stream()
+                .filter(cartItem -> cartItem.getMenuItem().getId().equals(menuItemId))
+                .findFirst();
+        if(existingCartItem.isPresent()) {
+            //update if item is already in the cart
+            CartItem cartItem = existingCartItem.get();
+            cartItem.setQuantity(cartItem.getQuantity() + quantity);
+        }
+        else{
+            CartItem newItem = new CartItem();
+            newItem.setMenuItem(menuItem);
+            newItem.setQuantity(quantity);
+            newItem.setCart(cart);
+            cart.addItem(newItem);
+
+        }
+        cartRepository.save(cart);
+    }
     @Transactional
     public void removeItemFromCart(Customer customer, Long itemId) {
         Cart cart = customer.getCart();
@@ -81,8 +91,8 @@ public class CartService {
         }
     }
 
-    public double getTotalForCart(Customer customer) {
+    public BigDecimal getTotalForCart(Customer customer) {
         Cart cart = customer.getCart();
-        return (cart !=null ) ? cart.calculateGrandTotal() : 0.00;
+        return (cart !=null ) ? cart.calculateGrandTotal() : BigDecimal.ZERO;
     }
 }
