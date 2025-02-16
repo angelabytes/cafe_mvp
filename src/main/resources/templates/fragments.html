@@ -7,32 +7,6 @@
     </ul>
 </nav>
 
-<!--<nav class="side-nav" th:fragment="side-nav">-->
-<!--    <menu>-->
-
-<!--        //Spring security is need to see if user is logged in-->
-<!--        //Thymeleaf authentication-->
-<!--        <li th:if="${#authentication.getPrincipal()?.username == 'anonymousUser'}">-->
-<!--            <a href="/login"><i class="fa-solid fa-sign-in"></i> Login</a>-->
-<!--        </li>-->
-<!--        <li th:if="${#httpServletRequest.remoteUser}">-->
-<!--            <a href="#" id="profile-link" th:text="${#httpServletRequest.remoteUser}"><i class="fa-solid fa-user"> Profile</i></a>-->
-<!--            <div  id="profile-menu" class="modal">-->
-<!--                <div class="modal-content">-->
-<!--                    <span class="close">&times;</span>-->
-<!--                    <menu>-->
-<!--                        <li><a href="/orders"><i class="fa-solid fa-box"></i> Orders</a></li>-->
-<!--                        <li><a href="/account"><i class="fa-solid fa-cog"></i> Account</a></li>-->
-<!--                        <li><a href="/logout"><i class="fa-solid fa-sign-out"></i> Logout</a></li>-->
-<!--                    </menu>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </li>-->
-<!--        <li><a href="/"><i class="fa-solid fa-house"></i>  Under the Stars</a></li>-->
-<!--        <li><a href="/menu"><i class="fa-solid fa-mug-hot"></i>  Starlight Delights</a></li>-->
-<!--        <li><a href="#about"><i class="fa-solid fa-hand-sparkles"></i> Unveiling the  Mystique</a></li>-->
-<!--    </menu>-->
-<!--</nav>-->
 
 <nav class="top-nav" th:fragment="top-nav">
     <li><a href="/cart"><i class="fa-solid fa-bag-shopping fa-xl"></i></a></li>
@@ -41,10 +15,12 @@
 
 <head th:fragment="head">
     <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer">
     <title>Mystic Twilight</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
           integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
           crossorigin="anonymous"
           referrerpolicy="no-referrer" />
+
 </head>

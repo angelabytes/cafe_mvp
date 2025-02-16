@@ -20,16 +20,13 @@ public class CafeUser {
 
     @NotBlank(message= "Email cannot be blank ")
     @Email(message = "Enter a valid email")
+    @Size(min = 8, max = 50, message="Email must be between 8 and 50 characters")
     private String email;
 
     @NotBlank(message = "Password is mandatory")
-    @Size(min = 8, max = 50, message="Email must be between 8 and 50 characters")
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public boolean isValidPassword() {
-        return password != null && password.length() >= 8;
-    }
 }

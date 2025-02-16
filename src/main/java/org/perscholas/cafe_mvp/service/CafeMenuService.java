@@ -27,12 +27,10 @@ public class CafeMenuService {
 
     @PostConstruct
     public void loadMenu() throws IOException {
-        //Check if menu already exists and skips loading if menu exists
         if(cafeMenuRepository.count() > 0) {
             logger.info("Menu already exists");
             return;
         }
-        //Loads the menu but throws an exception if it fails to load
         try{
             ObjectMapper mapper = new ObjectMapper();
             CafeMenu cafeMenu = mapper.readValue(new ClassPathResource("menu.json").getInputStream(), CafeMenu.class);
@@ -43,7 +41,6 @@ public class CafeMenuService {
             logger.error("Error loading menu from the JSON: {}",e.getMessage(), e);
             throw new RuntimeException("Failed to load menu from the JSON: " + e);
         }
-
     }
 
     public CafeMenu getCafeMenu() {

@@ -20,6 +20,7 @@ public class MenuItem {
     @Column(unique = true, nullable = false)
     private String name;
     private String description;
+
     @Column(precision = 10, scale = 2)
     private BigDecimal price;
 

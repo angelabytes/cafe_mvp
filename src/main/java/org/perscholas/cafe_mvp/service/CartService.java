@@ -5,6 +5,7 @@ import org.perscholas.cafe_mvp.model.CartItem;
 import org.perscholas.cafe_mvp.model.Customer;
 import org.perscholas.cafe_mvp.model.MenuItem;
 import org.perscholas.cafe_mvp.repository.CartRepository;
+import org.perscholas.cafe_mvp.repository.CustomerRepository;
 import org.perscholas.cafe_mvp.repository.MenuItemRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,8 @@ public class CartService {
     private CartRepository cartRepository;
     @Autowired
     private MenuItemRepository menuItemRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
 
     Logger logger = LoggerFactory.getLogger(CartService.class);
 
@@ -32,6 +35,25 @@ public class CartService {
 
     public Optional<Cart> getCart(Long id) {
         return cartRepository.findById(id);
+    }
+
+    public Cart getCartByCustomerId(Long customerId) {
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
+        return cartRepository.findByCustomer(customer).orElseGet(() -> {
+           Cart newCart = new Cart();
+           newCart.setCustomer(customer);
+           return cartRepository.save(newCart);
+        });
+    }
+
+    public Cart createCustomerCart(Long customerId){
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new RuntimeException("Customer not found"));
+        Cart cart = getCartByCustomerId(customerId);
+        cart.setCustomer(customer);
+        cart.setGrandTotal(BigDecimal.ZERO);
+        return cartRepository.save(cart);
     }
 
 
@@ -62,6 +84,7 @@ public class CartService {
             cart.getItems().add(newItem);
 
         }
+        updatePrices(cart);
         cartRepository.save(cart);
     }
     @Transactional
@@ -74,13 +97,15 @@ public class CartService {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Item not found in cart"));
         cart.removeItem(itemToRemove);
+        updatePrices(cart);
         cartRepository.save(cart);
     }
 
     @Transactional
-    public Cart updateItemsInCart(Long cartId, Long menuItemId, int updatedQuantity){
-        Cart cart = cartRepository.findById(cartId)
-                .orElseThrow(() -> new RuntimeException("Cart not found"));
+    public Cart updateItemsInCart(Long customerId, Long menuItemId, int updatedQuantity){
+//        Cart cart = cartRepository.findById(cartId)
+//                .orElseThrow(() -> new RuntimeException("Cart not found"));
+        Cart cart = getCartByCustomerId(customerId);
         cart.getItems().stream()
                 .filter(cartItem -> cartItem.getMenuItem().getId().equals(menuItemId))
                 .findFirst()

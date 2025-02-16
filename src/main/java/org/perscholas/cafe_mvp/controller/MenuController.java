@@ -73,6 +73,14 @@ public class MenuController {
         return "menu";
     }
 
+//    @GetMapping
+//    public String showMenu(Model model) {
+//        CafeMenu cafeMenu = cafeMenuService.getCafeMenu();
+//        logger.info("Adding cafe menu to model: {}", cafeMenu);
+//        model.addAttribute("cafeMenu", cafeMenu);
+//        return "menu";
+//    }
+
     @PostMapping("/add-section")
     public String addSection(Model model, MenuSection menuSection) {
         menuSectionService.addSectionToMenu(menuSection);

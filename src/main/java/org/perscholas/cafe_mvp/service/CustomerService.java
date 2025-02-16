@@ -1,8 +1,11 @@
 package org.perscholas.cafe_mvp.service;
 
+import org.perscholas.cafe_mvp.model.Cart;
 import org.perscholas.cafe_mvp.model.Customer;
+import org.perscholas.cafe_mvp.repository.CartRepository;
 import org.perscholas.cafe_mvp.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,9 +16,23 @@ public class CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private CartRepository cartRepository;
+    @Autowired
+    private CartService cartService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    public Customer createCustomer(Customer customer) {
-        return customerRepository.save(customer);
+
+    public Customer registerCustomer(Customer customer) {
+        customer.setPassword(passwordEncoder.encode(customer.getPassword()));
+        Customer savedCustomer = customerRepository.save(customer);
+
+        //Create cart
+        Cart cart = new Cart();
+        cart.setCustomer(savedCustomer);
+        cartService.saveCart(cart);
+        return savedCustomer;
     }
 
     public Optional<Customer> findCustomerByEmail(String email) {

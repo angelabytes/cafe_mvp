@@ -28,7 +28,6 @@ public class CartController {
     private MenuItemService menuItemService;
 
     @GetMapping
-//    public String viewCart(@RequestParam Long cartId, Model model) {
     public String viewCart(@RequestParam(required = false) Long cartId, HttpSession session, Model model) {
         //Check session for cartId, if it doesn't exist attempts to create one
         if(cartId == null){
@@ -62,7 +61,7 @@ public class CartController {
 
 
         Optional<MenuItem> menuItem = menuItemService.findMenuItemById(menuItemId);
-        if(!menuItem.isPresent()){
+        if(menuItem.isEmpty()){
             model.addAttribute("error", "Menu item is not found");
             return "redirect:/menu";
         }
@@ -116,10 +115,10 @@ public class CartController {
 
 
     @PostMapping("/update")
-    public String updateIteCart(@RequestParam Long menuItemId,
-                                @RequestParam int quantity,
-                                @RequestParam Long cartId,
-                                Model model) {
+    public String updateItemCart(@RequestParam Long menuItemId,
+                                 @RequestParam int quantity,
+                                 @RequestParam Long cartId,
+                                 Model model) {
         try{
             cartService.updateItemsInCart(cartId, menuItemId, quantity);
         }

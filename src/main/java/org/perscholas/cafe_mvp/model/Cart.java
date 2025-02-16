@@ -24,6 +24,9 @@ public class Cart {
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> items = new ArrayList<>();
 
+    @Column(precision = 10, scale = 2)
+    private BigDecimal grandTotal;
+
 
     public void addItem(CartItem item) {
         this.items.add(item);
